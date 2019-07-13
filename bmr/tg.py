@@ -1,4 +1,6 @@
 import csv
+from collections import OrderedDict
+import unidecode
 
 class BmrTg:
   tgList = []
@@ -35,9 +37,9 @@ class BmrTg:
           tmpList = [row for row in self.tgList if (country == row['Country'].lower()) and (name in row['Name'].lower())]
       else:
         if tgId:
-          [row for row in self.tgList if (country == row['Country'].lower()) and (tgId == row['Talkgroup'])]
+          tmpList =[row for row in self.tgList if (country == row['Country'].lower()) and (tgId == row['Talkgroup'])]
         else:
-          [row for row in self.tgList if country == row['Country'].lower()]
+          tmpList =[row for row in self.tgList if country == row['Country'].lower()]
     else:
       if name:
         if tgId:
@@ -45,6 +47,51 @@ class BmrTg:
         else:
           tmpList = [row for row in self.tgList if name in row['Name'].lower()]
       else:
-        tmpList = self.tgList
+        if tgId:
+          tmpList = [row for row in self.tgList if tgId == row['Talkgroup']]
+        else:
+          tmpList = self.tgList
     
     return tmpList
+
+  def createAnyToneCsvTgForFilters(self, filters = []):
+    counter = 1
+    resList = []
+    if filters:
+      for filter in filters:
+        if 'country' in filter.keys():
+          country = filter['country']
+        else:
+          country = None
+        if 'name' in filter.keys():
+          name = filter['name']
+        else:
+          name = None
+        if 'tgId' in filter.keys():
+          tgId = filter['tgId']
+        else:
+          tgId = None
+          
+        tmpList = self.__findTalkGroups(country=country, name=name, tgId=tgId)
+        resList += tmpList
+    else:
+      resList = self.tgList
+
+    # self.__printTalkGroup(resList)
+    # convert reslist (bmr) to AnyTone
+    atList = []
+    for row in resList:
+      od = OrderedDict()
+      od['No.'] = counter
+      od['Radio ID'] = row['Talkgroup']
+      od['Name'] = unidecode.unidecode(row['Name'])
+      od['Call Type'] = "Group Call"
+      od['Call Alert'] = "None"
+      counter += 1
+      atList.append(od)
+
+    keys = atList[0].keys()
+    with open('AnyTone-Talk-Groups.csv', 'w') as outputFile:
+      dictWriter = csv.DictWriter(outputFile, keys)
+      dictWriter.writeheader()
+      dictWriter.writerows(atList)

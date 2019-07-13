@@ -24,7 +24,11 @@ Tip: The file name contains a lot of unecessary white spaces, I suggest to remov
 
 ### Installation
 
-Clone the repository and run the app: `python3 app.py`
+Clone the repository and install the requirements: ` pip install -r requirements.txt`
+
+Edit app.py to filter the talk groups you want. There are a few examples to get you started.
+
+Run the app: `python3 app.py`
 
 ### Usage:
 
