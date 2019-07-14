@@ -6,29 +6,37 @@ class BmrTg:
   tgList = []
 
   def readBmrCsvTGExport(self, file):
+    """Reads a CSV file and creates a list od oredered dictionaries"""
     tmpList = list(csv.DictReader(open('TalkgroupsBrandMeister.csv')))
     self.tgList = tmpList
 
   def showTalkGroups(self, country = None, name = None, tgId = None):
+    """Prints a text table of talkgroups according to search parameters: country, name and tgId (talkgroup ID)"""
     tmpList = self.__findTalkGroups(country=country, name=name, tgId=tgId)
     self.__printHeader()
     self.__printTalkGroup(tmpList)
 
   def __printHeader(self):
+    """Prints a text table header"""
     print(f'{"-"*8:<8}|{"-"*11:<11}|{"-"*30}' )
     print(f'{"Country":<8}| {"Talkgroup":^10}| {"Name"}')
     print(f'{"-"*51}')
   
   def __printFooter(self):
+    """Prints a text table footer"""
     print(f'{"-"*51}')
 
   def __printTalkGroup(self, talkGroupList):
+    """Prints a list of talkgroups formated as a text table"""
     for row in talkGroupList:
       print(f'{row["Country"]:<8}| {row["Talkgroup"]:^10}| {row["Name"]}')
     self.__printFooter()
 
 
   def __findTalkGroups(self, country = None, name = None, tgId = None):
+    """
+    Finds all talkgroups according to search parameters: country, name and tgId (talkgroup ID)
+    """
     if country:
       if name:
         if tgId:
@@ -55,6 +63,13 @@ class BmrTg:
     return tmpList
 
   def createAnyToneCsvTgForFilters(self, filters = []):
+    """
+    Creates a talkgroup CSV file ready to be uploaded to an AnyTone radio
+
+    The filters argument is a dictionary of filters.
+
+    A filter can have a maximum of 3 keys: 'country', 'name' and 'tgId' (talkgroup ID)
+    """
     counter = 1
     resList = []
     if filters:
