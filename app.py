@@ -9,7 +9,7 @@ tg.readBmrCsvTGExport("TalkgroupsBrandMeister.csv")
 # tg.showTalkGroups(country="fr")
 
 # Show talk group for country code 'fr' and names containing 'est'
-# tg.showTalkGroups(country="fr", name="est")
+# tg.showTalkGroups(country="FR", name="est")
 
 # Show talk group for country code 'global', with name 'parrot' with talk group id 9990
 # tg.showTalkGroups(country="global", name="parrot", tgId="9990")

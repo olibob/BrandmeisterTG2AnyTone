@@ -38,7 +38,11 @@ class BmrTg:
     Finds all talkgroups according to search parameters: country, name and tgId (talkgroup ID)
     """
     if country:
+      # Case insensitive search
+      country = country.lower()
       if name:
+        # Case insensitive search
+        name = name.lower()
         if tgId:
           tmpList = [row for row in self.tgList if (country == row['Country'].lower()) and (name in row['Name'].lower()) and (tgId == row['Talkgroup'])]
         else:
@@ -92,7 +96,6 @@ class BmrTg:
     else:
       resList = self.tgList
 
-    # self.__printTalkGroup(resList)
     # convert reslist (bmr) to AnyTone
     atList = []
     for row in resList:

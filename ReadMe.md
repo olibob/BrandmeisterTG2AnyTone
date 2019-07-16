@@ -32,5 +32,7 @@ Run the app: `python3 app.py`
 
 ### Usage:
 
-The brandmeister CSV file provided (TalkgroupsBrandMeister.csv) has been exported 13 july 2019. Use it for testing only and get a current CSV export from Brandmeister if you want to write an AnyTone talk group CSV to be imported to your radio.
+The brandmeister CSV file provided (TalkgroupsBrandMeister.csv) has been exported 13 july 2019. Use it for testing only and get a current CSV export from Brandmeister if you want fresh data.
+
+Search is case insensitive.
 
