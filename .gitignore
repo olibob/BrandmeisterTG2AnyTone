@@ -1,5 +1,6 @@
 __pycache__
 .vscode
 .env
-AnyTone*
+AnyTone-TGs.csv
+anytone.egg-info
 *.pyc

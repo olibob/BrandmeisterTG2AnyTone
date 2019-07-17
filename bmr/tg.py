@@ -109,7 +109,7 @@ class BmrTg:
       atList.append(od)
 
     keys = atList[0].keys()
-    with open('AnyTone-Talk-Groups.csv', 'w') as outputFile:
+    with open('AnyTone-TGs.csv', 'w') as outputFile:
       dictWriter = csv.DictWriter(outputFile, keys)
       dictWriter.writeheader()
       dictWriter.writerows(atList)
