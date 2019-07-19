@@ -1,6 +1,8 @@
 import csv
 from collections import OrderedDict
 import unidecode
+import urllib.request
+import shutil
 
 class BmrTg:
   tgList = []
@@ -66,7 +68,7 @@ class BmrTg:
     
     return tmpList
 
-  def createAnyToneCsvTgForFilters(self, filters = []):
+  def createAnyToneCsvTgForFilters(self, outputFile, filters = []):
     """
     Creates a talkgroup CSV file ready to be uploaded to an AnyTone radio
 
@@ -109,7 +111,12 @@ class BmrTg:
       atList.append(od)
 
     keys = atList[0].keys()
-    with open('AnyTone-TGs.csv', 'w') as outputFile:
-      dictWriter = csv.DictWriter(outputFile, keys)
+    with open(outputFile, 'w') as f:
+      dictWriter = csv.DictWriter(f, keys)
       dictWriter.writeheader()
       dictWriter.writerows(atList)
+
+  def dmrUserList(self, url, outputFile):
+    # Download the file from `url` and save it locally under `file_name`:
+    with urllib.request.urlopen(url) as response, open(outputFile, 'wb') as out_file:
+      shutil.copyfileobj(response, out_file)
