@@ -57,11 +57,9 @@ def create(input, output, filters = None):
   else:
     cliFilters = None
 
-  click.echo(cliFilters)
-
-  # tg = BmrTg()
-  # tg.readBmrCsvTGExport(input)
-  # tg.createAnyToneCsvTgForFilters(outputFile = output, filters = cliFilters)
+  tg = BmrTg()
+  tg.readBmrCsvTGExport(input)
+  tg.createAnyToneCsvTgForFilters(outputFile = output, filters = cliFilters)
 
 @main.command()
 @click.argument('output', type=click.Path(exists=False), required = False)
