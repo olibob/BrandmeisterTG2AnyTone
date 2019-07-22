@@ -1,13 +1,15 @@
 import csv
 from collections import OrderedDict
 import unidecode
+import urllib.request
+import shutil
 
 class BmrTg:
   tgList = []
 
   def readBmrCsvTGExport(self, file):
     """Reads a CSV file and creates a list od oredered dictionaries"""
-    tmpList = list(csv.DictReader(open('TalkgroupsBrandMeister.csv')))
+    tmpList = list(csv.DictReader(open(file)))
     self.tgList = tmpList
 
   def showTalkGroups(self, country = None, name = None, tgId = None):
@@ -54,6 +56,7 @@ class BmrTg:
           tmpList =[row for row in self.tgList if country == row['Country'].lower()]
     else:
       if name:
+        name = name.lower()
         if tgId:
           tmpList = [row for row in self.tgList if (name in row['Name'].lower()) and (tgId == row['Talkgroup'])]
         else:
@@ -66,9 +69,9 @@ class BmrTg:
     
     return tmpList
 
-  def createAnyToneCsvTgForFilters(self, filters = []):
+  def createAnyToneTgListForFilters(self, filters = []):
     """
-    Creates a talkgroup CSV file ready to be uploaded to an AnyTone radio
+    Formats talkgroup list in order to be writen to a CSV file (compatible with AnyTone radios)
 
     The filters argument is a dictionary of filters.
 
@@ -108,8 +111,9 @@ class BmrTg:
       counter += 1
       atList.append(od)
 
-    keys = atList[0].keys()
-    with open('AnyTone-Talk-Groups.csv', 'w') as outputFile:
-      dictWriter = csv.DictWriter(outputFile, keys)
-      dictWriter.writeheader()
-      dictWriter.writerows(atList)
+    return atList
+
+  def dmrUserList(self, url, outputFile):
+    """Downloads a file located at 'url' and saves it locally under 'file_name':"""
+    with urllib.request.urlopen(url) as response, open(outputFile, 'wb') as out_file:
+      shutil.copyfileobj(response, out_file)
