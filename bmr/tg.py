@@ -9,7 +9,7 @@ class BmrTg:
 
   def readBmrCsvTGExport(self, file):
     """Reads a CSV file and creates a list od oredered dictionaries"""
-    tmpList = list(csv.DictReader(open('TalkgroupsBrandMeister.csv')))
+    tmpList = list(csv.DictReader(open(file)))
     self.tgList = tmpList
 
   def showTalkGroups(self, country = None, name = None, tgId = None):
@@ -68,9 +68,9 @@ class BmrTg:
     
     return tmpList
 
-  def createAnyToneCsvTgForFilters(self, outputFile, filters = []):
+  def createAnyToneTgListForFilters(self, filters = []):
     """
-    Creates a talkgroup CSV file ready to be uploaded to an AnyTone radio
+    Formats talkgroup list ready to be writen to a CSV file (compatible with AnyTone radios)
 
     The filters argument is a dictionary of filters.
 
@@ -110,11 +110,7 @@ class BmrTg:
       counter += 1
       atList.append(od)
 
-    keys = atList[0].keys()
-    with open(outputFile, 'w') as f:
-      dictWriter = csv.DictWriter(f, keys)
-      dictWriter.writeheader()
-      dictWriter.writerows(atList)
+    return atList
 
   def dmrUserList(self, url, outputFile):
     # Download the file from `url` and save it locally under `file_name`:
