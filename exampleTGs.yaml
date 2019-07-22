@@ -1,0 +1,62 @@
+########### Europe
+# FR
+- country: 'fr'
+# DE
+- tgId: '262'
+# AT
+- tgId: '232' 
+# BE
+- tgId: '206'
+# BG
+- tgId: '284'
+# CY
+- tgId: '280'
+# HR
+- tgId: '219'
+# DK
+- tgId: '2383'
+# ES
+- tgId: '214'
+# EE
+- tgId: '248'
+# FI
+- tgId: '244'
+# GR
+- tgId: '202'
+# HU
+- tgId: '216'
+# GB
+- country: 'gb'
+# IT
+- tgId: '222'
+# LT
+- tgId: '246'
+# LU
+- tgId: '270'
+# MT
+- tgId: '278'
+# PL
+- tgId: '260'
+# PT
+- tgId: '268'
+# NL
+- tgId: '204'
+# CZ
+- tgId: '230'
+# RO
+- tgId: '226'
+# SK
+- tgId: '231'
+# SO
+# SE
+- tgId: '924'
+########## US
+- country: 'us'
+########## Canada
+- country: 'ca'
+########## Australia
+- tgId: '505'
+########## South Africa
+- tgId: '655'
+########## Parrot
+- tgId: '9990'
