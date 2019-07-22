@@ -94,7 +94,7 @@ def generate(brandmeister_csv, input_filters, output, filters = None):
 @main.command()
 @click.argument('output', type=click.Path(exists=False), required = False)
 def users(output):
-  """Download the DMR user database in CSV format"""
+  """Download the DMR user database from radioid.net"""
   defaultURL = 'https://radioid.net/static/user.csv'
   if not output:
     output = 'Users.csv'

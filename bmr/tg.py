@@ -70,7 +70,7 @@ class BmrTg:
 
   def createAnyToneTgListForFilters(self, filters = []):
     """
-    Formats talkgroup list ready to be writen to a CSV file (compatible with AnyTone radios)
+    Formats talkgroup list in order to be writen to a CSV file (compatible with AnyTone radios)
 
     The filters argument is a dictionary of filters.
 
@@ -113,6 +113,6 @@ class BmrTg:
     return atList
 
   def dmrUserList(self, url, outputFile):
-    # Download the file from `url` and save it locally under `file_name`:
+    """Downloads a file located at 'url' and saves it locally under 'file_name':"""
     with urllib.request.urlopen(url) as response, open(outputFile, 'wb') as out_file:
       shutil.copyfileobj(response, out_file)
