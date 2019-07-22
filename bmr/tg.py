@@ -56,6 +56,7 @@ class BmrTg:
           tmpList =[row for row in self.tgList if country == row['Country'].lower()]
     else:
       if name:
+        name = name.lower()
         if tgId:
           tmpList = [row for row in self.tgList if (name in row['Name'].lower()) and (tgId == row['Talkgroup'])]
         else:
